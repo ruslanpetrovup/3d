@@ -2,7 +2,10 @@ import { BadRequestException } from '@nestjs/common';
 import { extname } from 'path';
 import { promises as fs } from 'fs';
 
-const uploadFile = async (file: Express.Multer.File, userId: string): Promise<string> => {
+const uploadFile = async (
+  file: Express.Multer.File,
+  userId: string,
+): Promise<string> => {
   try {
     // Проверяем наличие файла
     if (!file) {
@@ -13,25 +16,25 @@ const uploadFile = async (file: Express.Multer.File, userId: string): Promise<st
     const allowedTypes = [
       // Видео
       'video/mp4',
-      'video/mpeg', 
+      'video/mpeg',
       'video/quicktime',
       'video/x-msvideo',
       'video/x-ms-wmv',
-      
+
       // Музыка
       'audio/mpeg',
       'audio/wav',
       'audio/ogg',
       'audio/midi',
       'audio/x-midi',
-      
+
       // Фото
       'image/jpeg',
-      'image/png', 
+      'image/png',
       'image/gif',
       'image/bmp',
       'image/webp',
-      
+
       // Документы
       'application/pdf',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // xlsx
@@ -39,7 +42,7 @@ const uploadFile = async (file: Express.Multer.File, userId: string): Promise<st
       'application/msword', // doc
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // docx
       'application/vnd.ms-powerpoint', // ppt
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation' // pptx
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation', // pptx
     ];
 
     // Проверяем тип файла
@@ -85,8 +88,7 @@ const uploadFile = async (file: Express.Multer.File, userId: string): Promise<st
     await fs.writeFile(`uploads/${fileName}`, file.buffer);
 
     return fileName;
-
-  } catch (error) {
+  } catch {
     throw new BadRequestException('Произошла ошибка при обновлении файла');
   }
 };

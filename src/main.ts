@@ -3,11 +3,8 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import * as bodyParser from 'body-parser';
-import rateLimit from 'express-rate-limit';
-import { ValidationPipe } from '@nestjs/common';
 import * as passport from 'passport';
 import { Request } from 'express';
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -37,18 +34,26 @@ async function bootstrap() {
   //   transform: true,
   // }));
   app.use(passport.initialize());
-  app.use('/payment/webhook', bodyParser.raw({ 
-    type: 'application/json',
-    limit: '500mb'
-  }));
-  app.use(bodyParser.json({ 
-    limit: '500mb',
-    verify: (req: Request, res, buf) => {
-      if (req.originalUrl === '/payment/webhook' || req.originalUrl === '/sumsub/webhook') {
-        (req as any).rawBody = buf;
-      }
-    }
-  }));
+  app.use(
+    '/payment/webhook',
+    bodyParser.raw({
+      type: 'application/json',
+      limit: '500mb',
+    }),
+  );
+  app.use(
+    bodyParser.json({
+      limit: '500mb',
+      verify: (req: Request, res, buf) => {
+        if (
+          req.originalUrl === '/payment/webhook' ||
+          req.originalUrl === '/sumsub/webhook'
+        ) {
+          (req as any).rawBody = buf;
+        }
+      },
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('API Documentation LilYou')
@@ -57,7 +62,6 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
 
-  
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TempGeneratePhoto } from './entities/temp-generate-photo.entity';
@@ -13,7 +13,6 @@ export class PreviewService {
   private readonly openai: OpenAI;
 
   private readonly basePrompt = PROMPT_PHOTO;
-  
 
   private readonly uploadDir = 'uploads/temp-photos';
 
@@ -25,9 +24,8 @@ export class PreviewService {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const fs = require('fs');
-    if (!fs.existsSync(this.uploadDir)) {
-      fs.mkdirSync(this.uploadDir, { recursive: true });
+    if (!existsSync(this.uploadDir)) {
+      mkdirSync(this.uploadDir, { recursive: true });
     }
   }
 
@@ -54,21 +52,28 @@ export class PreviewService {
         ],
         max_tokens: 400,
       });
-      
+
       const gptGeneratedPrompt = gptResponse.choices[0].message.content.trim();
       console.log('GPT response:', gptGeneratedPrompt);
-      
+
       if (!gptGeneratedPrompt) {
         throw new Error('GPT не зміг згенерувати опис.');
       }
-      
+
       // Разделяем описание куклы и аксессуары
-      const [description, accessoriesPart] = gptGeneratedPrompt.split('As accessories, include:');
-      const accessories = accessoriesPart ? accessoriesPart.trim() : 'a plain book, a simple cup, a basic necklace';
-      
+      const [description, accessoriesPart] = gptGeneratedPrompt.split(
+        'As accessories, include:',
+      );
+      const accessories = accessoriesPart
+        ? accessoriesPart.trim()
+        : 'a plain book, a simple cup, a basic necklace';
+
       // Формируем финальный промпт
-      const finalPrompt = PROMPT_PHOTO.replace('[DESCRIPTION]', description).replace('[ACCESSORIES]', accessories);
-      
+      const finalPrompt = PROMPT_PHOTO.replace(
+        '[DESCRIPTION]',
+        description,
+      ).replace('[ACCESSORIES]', accessories);
+
       // Генерируем изображение с DALL-E
       const dalleResponse = await this.openai.images.generate({
         model: 'dall-e-3',
@@ -84,7 +89,6 @@ export class PreviewService {
         responseType: 'arraybuffer',
       });
       const buffer = Buffer.from(response.data);
-
 
       const fileName = `generated_${Date.now()}.png`;
       const filePath = path.join(this.uploadDir, fileName);
