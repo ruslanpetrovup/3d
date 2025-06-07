@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/cancel-payment/page": "/cancel-payment",
+  "/contact/page": "/contact",
+  "/page": "/",
+  "/preview/page": "/preview",
+  "/about/page": "/about",
+  "/thanks-payment/page": "/thanks-payment"
+}
