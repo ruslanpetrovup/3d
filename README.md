@@ -28,3 +28,7 @@ cd backend
 npm test
 ```
 
+## Telegram notifications
+
+Set the `TELEGRAM_BOT_PASSWORD` environment variable in the backend. Telegram users can subscribe to notifications by sending `/auth <password>` to the bot. Their chat IDs will be stored in the database and used for event alerts.
+
