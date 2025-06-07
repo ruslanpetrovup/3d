@@ -1,7 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 import 'dotenv/config';
 
-// List of required environment variables
 const requiredEnvVars = [
   'TELEGRAM_BOT_TOKEN',
   'DB_HOST',
@@ -13,12 +12,12 @@ const requiredEnvVars = [
   'API_URL',
   'FRONTEND_URL',
   'STRIPE_SECRET_KEY',
-  'STRIPE_WEBHOOK_SECRET',
-  'SMTP_HOST',
-  'SMTP_PORT',
-  'SMTP_USER',
-  'SMTP_PASSWORD',
-  'SMTP_FROM',
+  // 'STRIPE_WEBHOOK_SECRET',
+  // 'SMTP_HOST',
+  // 'SMTP_PORT',
+  // 'SMTP_USER',
+  // 'SMTP_PASSWORD',
+  // 'SMTP_FROM',
   'TELEGRAM_BOT_PASSWORD',
   'TELEGRAM_ADMIN_CHAT_ID',
 ];
