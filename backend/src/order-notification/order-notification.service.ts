@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { Client } from 'pg';
 import { InjectBot, Start, Update } from 'nestjs-telegraf';
 import { Context, Telegraf } from 'telegraf';
@@ -6,7 +6,7 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 @Update()
-export class OrderNotificationService implements OnModuleInit {
+export class OrderNotificationService implements OnModuleInit, OnModuleDestroy {
   @Start()
   async start(ctx: Context) {
     const chatId = ctx.chat.id;
@@ -65,6 +65,12 @@ export class OrderNotificationService implements OnModuleInit {
         await this.sendTelegramNotification(orderId);
       }
     });
+  }
+
+  async onModuleDestroy() {
+    if (this.pgClient) {
+      await this.pgClient.end();
+    }
   }
 
   private async sendTelegramNotification(orderId: string) {
