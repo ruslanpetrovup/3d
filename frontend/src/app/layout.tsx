@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from 'next/head';
 import Script from 'next/script';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -25,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="twitter:description" content="Get your unique 3D model generated from your photo! Perfect for avatars, gifts, and digital collections. Fast, easy, and high-quality 3D starter packs." />
         <meta name="twitter:image" content="https://i.ibb.co/fdDbxQqD/example1.png" />
       </Head>
-      <body className="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+      <body className={`${inter.className} bg-[#0D1B2A] text-white min-h-screen flex flex-col`}>
         <Script
           id="clarity"
           strategy="afterInteractive"
@@ -40,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         <Header />
-        <main className="flex-grow bg-[#0D1B2A]">
+        <main className="flex-grow">
           {children}
         </main>
         <Footer />
