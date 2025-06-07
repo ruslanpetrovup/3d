@@ -4,9 +4,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from 'next/head';
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
+import { Inter, Poppins } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-poppins' });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -28,7 +29,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="twitter:description" content="Get your unique 3D model generated from your photo! Perfect for avatars, gifts, and digital collections. Fast, easy, and high-quality 3D starter packs." />
         <meta name="twitter:image" content="https://i.ibb.co/fdDbxQqD/example1.png" />
       </Head>
-      <body className={`${inter.className} bg-[#0D1B2A] text-white min-h-screen flex flex-col`}>
+      <body
+        className={`${inter.variable} ${poppins.variable} bg-gradient-to-b from-[#0D1B2A] to-[#1B263B] text-white min-h-screen flex flex-col`}
+      >
         <Script
           id="clarity"
           strategy="afterInteractive"
