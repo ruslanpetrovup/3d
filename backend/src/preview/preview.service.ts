@@ -8,6 +8,7 @@ import * as path from 'path';
 import { PROMPT_PHOTO } from './promts';
 import { LatestPhoto } from './interfaces/preview.interface';
 import { ConfigService } from '@nestjs/config';
+import { OrderNotificationService } from '../order-notification/order-notification.service';
 
 @Injectable()
 export class PreviewService {
@@ -20,6 +21,7 @@ export class PreviewService {
     private readonly configService: ConfigService,
     @InjectRepository(TempGeneratePhoto)
     private readonly tempPhotoRepository: Repository<TempGeneratePhoto>,
+    private readonly notificationService: OrderNotificationService,
   ) {
     this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
@@ -86,6 +88,7 @@ export class PreviewService {
       }
 
       console.log('Starting starter pack generation...');
+      await this.notificationService.sendMessageToSubscribers('User started generation');
       const { file_name, file_path } = await this.generateStarterPack(file);
 
       const tempPhoto = this.tempPhotoRepository.create({
