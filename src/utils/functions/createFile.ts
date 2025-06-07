@@ -31,7 +31,7 @@ export const createFile = async (file: Express.Multer.File, userId: string, cate
     // Sanitize filename: replace all "_" with "-" and multiple hyphens with single one
     let sanitizedFileName = file.originalname
       .replace(/_/g, '-')  // Replace all underscores with hyphens
-      .replace(/_+/g, '-') // Replace multiple hyphens with single one
+      .replace(/-+/g, '-') // Replace multiple hyphens with single one
       .replace(/[^a-zA-Z0-9а-яА-ЯёЁ\-\. ]/g, '')  // Keep only allowed characters
       .replace(/\s+/g, '-'); // Replace spaces with underscores
 
