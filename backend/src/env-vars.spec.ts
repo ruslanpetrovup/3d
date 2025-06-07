@@ -1,4 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
+import 'dotenv/config';
 
 // List of required environment variables
 const requiredEnvVars = [
