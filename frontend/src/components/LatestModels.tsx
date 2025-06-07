@@ -67,7 +67,7 @@ export default function LatestModels() {
 
   return (
     <div className="w-full max-w-6xl mt-10 mx-auto py-8">
-      <h2 className="text-3xl font-bold text-white mb-8 text-center">Latest Models</h2>
+      <h2 className="text-3xl font-bold text-white mb-8 text-center font-display">Latest Models</h2>
       <Swiper
         modules={[Autoplay, Pagination]}
         spaceBetween={24}
@@ -83,7 +83,7 @@ export default function LatestModels() {
       >
         {photos.map((photo) => (
           <SwiperSlide key={photo.id}>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+            <div className="bg-[#1B263B] rounded-2xl border border-white/10 shadow-lg hover:shadow-orange-500/30 overflow-hidden flex flex-col h-full transition-shadow">
               <div className="relative w-full h-90">
                 <Image
                   src={photo.imageUrl}

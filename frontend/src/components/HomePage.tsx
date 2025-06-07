@@ -8,7 +8,7 @@ import LatestModels from '../components/LatestModels';
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-[#0D1B2A] text-white px-4 py-10 font-sans">
+    <main className="relative min-h-screen bg-gradient-to-b from-[#0D1B2A] to-[#1B263B] text-white px-4 py-10 font-sans">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-0 bg-gradient-radial from-orange-500/20 to-transparent rounded-full blur-[120px] pointer-events-none" />
 
@@ -20,13 +20,13 @@ export default function HomePage() {
           transition={{ duration: 1 }}
           className="flex-1 text-center md:text-left"
         >
-          <h1 className="text-7xl md:text-9xl font-bold leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md mb-[-20px]">
+          <h1 className="text-7xl md:text-9xl font-bold leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md mb-[-20px] font-display">
           Create 
           </h1>
-          <h1 className="text-4xl md:text-[61px] font-bold font-cursive leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md mb-[-5px]">
+          <h1 className="text-4xl md:text-[61px] font-bold leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md mb-[-5px] font-display">
            a starter pack 
           </h1>
-          <h1 className="text-2xl md:text-[43px] font-medium mb-6 leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md">
+          <h1 className="text-2xl md:text-[43px] font-medium mb-6 leading-tight bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-md font-display">
            based on your photo 
           </h1>
           <p className="text-lg md:text-[17px] mb-8 text-gray-300">
