@@ -1,0 +1,9 @@
+node_modules/
+**/node_modules/
+
+# logs
+npm-debug.log*
+
+# OS generated
+.DS_Store
+Thumbs.db
