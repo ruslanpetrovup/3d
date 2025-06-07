@@ -61,6 +61,11 @@ let OrderNotificationService = class OrderNotificationService {
             }
         });
     }
+    async onModuleDestroy() {
+        if (this.pgClient) {
+            await this.pgClient.end();
+        }
+    }
     async sendTelegramNotification(orderId) {
         const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
         const message = `✅ Заказ #${orderId} был успешно оплачен!`;
