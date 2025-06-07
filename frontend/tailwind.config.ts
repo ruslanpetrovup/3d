@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import defaultTheme from 'tailwindcss/defaultTheme';
 const config: Config = {
   content: [
     './app/**/*.{ts,tsx}',
@@ -8,8 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...(fontFamily.sans as string[])],
-        display: ['var(--font-poppins)', ...(fontFamily.sans as string[])],
+        sans: ['var(--font-inter)', ...(defaultTheme.fontFamily.sans as string[])],
+        display: ['var(--font-poppins)', ...(defaultTheme.fontFamily.sans as string[])],
       },
     },
   },
